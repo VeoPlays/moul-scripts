@@ -1180,7 +1180,8 @@ class xKI(ptModifier):
             "Location" : gpsLocation,
             "Age Name" : xKIHelpers.GetAgeName()
             }
-        image.saveAsPNG(tryName, metadata)
+        ## Temp fix for KI pic crash
+        ##image.saveAsPNG(tryName, metadata)
 
     ## Called by Plasma when the player list has been updated.
     # This makes sure that everything is updated and refreshed.
@@ -3777,20 +3778,11 @@ class xKI(ptModifier):
         gps2 = ptGUIControlTextBox(BigKI.dialog.getControlFromTag(kGUI.BKIGPS2TextID))
         gps3 = ptGUIControlTextBox(BigKI.dialog.getControlFromTag(kGUI.BKIGPS3TextID))
         self.dniCoords.update()
+        ## Temp. fix for the broken coords in big KI
         if self.gKIMarkerLevel == kKIMarkerNormalLevel:
-            sdl = xPsnlVaultSDL()
-            if sdl["GPSEnabled"][0]:
                 gps1.setString(str(self.dniCoords.getTorans()))
                 gps2.setString(str(self.dniCoords.getHSpans()))
                 gps3.setString(str(self.dniCoords.getVSpans()))
-            else:
-                gps1.setString("0")
-                gps2.setString("0")
-                gps3.setString("0")
-        else:
-            gps1.setString("0")
-            gps2.setString("0")
-            gps3.setString("0")
         PtAtTimeCallback(self.key, 5, kTimers.BKITODCheck)
 
     #~~~~~~~~~~~~~~~~~~#
